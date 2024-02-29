@@ -14,6 +14,9 @@ export const Table = (props: TableProps) => {
         rows,
         isLoaded
     } = props;
+
+    const noResults = isLoaded && (!rows || rows.length === 0);
+
     return (
         <div className={cls.Table}>
             <table>
@@ -33,6 +36,13 @@ export const Table = (props: TableProps) => {
                 }
             </table>
             {!isLoaded && <Loader />}
+
+            {noResults && (
+                <div className={cls.noResultsMessage}>
+                    <p>Результатов не найдено.</p>
+                    <p>Попробуйте сбросить фильтры.</p>
+                </div>
+            )}
         </div>
     );
 };

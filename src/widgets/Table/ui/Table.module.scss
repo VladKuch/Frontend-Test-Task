@@ -1,4 +1,4 @@
-
+@import 'app/styles/vars';
 .Table {
     table {
         width: 100%;
@@ -11,6 +11,21 @@
         }
         th {
             background-color: #f2f2f2;
+        }
+    }
+
+    .noResultsMessage {
+        display: flex;
+        flex-direction: column;
+        font-size: $fontSizeL;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 600px;
+        background-color: $disabledColor;
+
+        p {
+            margin: 10px;
         }
     }
 }
