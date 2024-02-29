@@ -77,7 +77,7 @@ const fetchProducts = createAsyncThunk<ProductsSchema, ParamsSchema, ThunkConfig
                 if (retryCount === MAX_RETRY_COUNT) {
                     return rejectWithValue(e.message);
                 }
-
+                // Повторный запрос через 1 сек.
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
         }
