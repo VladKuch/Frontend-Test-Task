@@ -1,26 +1,30 @@
 import cls from './Inputs.module.scss';
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
     label: string;
     id: string;
-    value?: string;
-    onChange: (value: string) => void
+    onChange: (e:React.ChangeEvent<HTMLInputElement>) => void
 }
 export const InputText = (props: InputProps) => {
     const {
         label, 
         id,
-        value = '',
-        onChange
+        onChange,
+        ...otherProps
     } = props;
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onChange?.(e.target.value);
+        onChange(e);
     };
 
     return (
         <div className={cls.Input}>
             <label htmlFor={id}>{label}</label>
-            <input type="text" id={id} name={id} onChange={onChangeHandler} value={value}/>
+            <input 
+                type="text" 
+                id={id} 
+                onChange={onChangeHandler} 
+                {...otherProps}
+            />
         </div>
     );
 };

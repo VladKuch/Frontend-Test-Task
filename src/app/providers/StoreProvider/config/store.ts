@@ -6,6 +6,7 @@ import { productsReducer } from 'entities/Products';
 import { paginationReducer } from 'entities/Pagination';
 import { filtersReducer } from 'entities/Filters';
 
+// Функция для создания Redux хранилища
 export function createReduxStore(
     initialState?: StateSchema,
     asyncReducers?: ReducersMapObject<StateSchema>

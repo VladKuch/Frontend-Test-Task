@@ -23,8 +23,7 @@ export const paginationSlice = createSlice({
             state.currentPage == 1 && (state.isFirstPage = true);
             state.isLastPage == true && (state.isLastPage = false);
         }
-    },
-    extraReducers: (builder) => {},
+    }
 });
 
 export const { actions: paginationActions, reducer: paginationReducer } = paginationSlice;

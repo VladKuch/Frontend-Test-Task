@@ -5,8 +5,6 @@ import { memo, useCallback, useState } from 'react';
 import { InputText } from 'shared/ui/Inputs/InputText';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { filtersActions } from '../model/slice/filtersSlice';
-import { useSelector } from 'react-redux';
-import { getFilters } from '../model/selectors/getFilters/getFilters';
 import { FiltersSchema } from '../model/types/filters';
 
 interface FiltersProps {
@@ -23,20 +21,20 @@ export const Filters = memo((props: FiltersProps) => {
     const [filterBrand, setFilterBrand] = useState<string>('');
     
     const onPriceChange = useCallback(
-        (value) => {
-            setFilterPrice(value);
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setFilterPrice(parseFloat(e.target.value));
         }, 
         [setFilterPrice]
     );
     const onProductChange = useCallback(
-        (value) => {
-            setFilterProduct(value);
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setFilterProduct(e.target.value);
         }, 
         [setFilterProduct]
     );
     const onBrandChange = useCallback(
-        (value) => {
-            setFilterBrand(value);
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setFilterBrand(e.target.value);
         }, 
         [setFilterBrand]
     );
@@ -68,9 +66,25 @@ export const Filters = memo((props: FiltersProps) => {
     )
     return (
         <div className={cls.FilterSection}>
-            <InputText id='product' label='Название:' onChange={onProductChange} value={filterProduct}/>
-            <InputText id='brand' label='Бренд:' onChange={onBrandChange} value={filterBrand}/>
-            <InputNumber id='price' label='Цена:' onChange={onPriceChange} value={filterPrice} />
+            <InputText 
+                id='product' 
+                label='Название:' 
+                onChange={onProductChange} 
+                value={filterProduct}
+            />
+            <InputText 
+                id='brand' 
+                label='Бренд:' 
+                onChange={onBrandChange} 
+                value={filterBrand}
+            />
+            <InputNumber 
+                id='price' 
+                label='Цена:' 
+                onChange={onPriceChange} 
+                value={filterPrice} 
+                max={1}
+            />
             <Button 
                 onClick={onFiltersSubmit} 
                 theme={ButtonTheme.SUCCESS} 

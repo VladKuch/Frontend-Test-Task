@@ -7,14 +7,13 @@ export const filtersSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
-        resetFilters: (state) => {
+        resetFilters: () => {
             return {};
         },
-        setFilters: (state, action: PayloadAction<FiltersSchema>) => {
-            return {...state, ...action.payload}
+        setFilters: (_, action: PayloadAction<FiltersSchema>) => {
+            return {...action.payload}
         }
-    },
-    extraReducers: (builder) => {},
+    }
 });
 
 export const { actions: filtersActions, reducer: filtersReducer } = filtersSlice;

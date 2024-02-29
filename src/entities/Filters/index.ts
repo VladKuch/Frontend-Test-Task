@@ -13,4 +13,4 @@ export {
 
 export {
     getFilters
-} from './model/selectors/getFilters/getFilters';
+} from './model/selectors/getPaginationInfo/getFilters';

@@ -1,26 +1,33 @@
 import cls from './Inputs.module.scss';
-interface NumberProps {
+interface NumberProps extends React.InputHTMLAttributes<HTMLInputElement>{
     label: string;
     id: string;
     value?: number;
-    onChange: (value: number) => void
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 export const InputNumber = (props: NumberProps) => {
     const {
         label, 
         id,
         value = 0,
-        onChange
+        onChange,
+        ...otherProps
     } = props;
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onChange?.(parseFloat(e.target.value));
+        onChange(e);
     };
 
     return (
         <div className={cls.Input}>
             <label htmlFor={id}>{label}</label>
-            <input type="number" id={id} name={id} onChange={onChangeHandler} value={(value > 0) ?  value : ''}/>
+            <input 
+                type="number" 
+                id={id} 
+                onChange={onChangeHandler} 
+                value={(value > 0) ?  value : ''}
+                {...otherProps}
+            />
         </div>
     );
 };

@@ -1,12 +1,13 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Table.module.scss';
 import { Key } from 'react';
 import { Loader } from 'widgets/Loader';
+
 interface TableProps {
     header: Array<string>;
     rows?: Array<Array<string>>;
     isLoaded: boolean;
 }
+
 export const Table = (props: TableProps) => {
     const {
         header,
