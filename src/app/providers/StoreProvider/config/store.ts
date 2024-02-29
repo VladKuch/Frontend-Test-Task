@@ -4,6 +4,7 @@ import { createReducerManager } from './ReducerManager';
 import { $api } from 'shared/api/api';
 import { productsReducer } from 'entities/Products';
 import { paginationReducer } from 'entities/Pagination';
+import { filtersReducer } from 'entities/Filters';
 
 export function createReduxStore(
     initialState?: StateSchema,
@@ -11,7 +12,8 @@ export function createReduxStore(
     ) {
     const rootReducer: ReducersMapObject<StateSchema> = {
         products: productsReducer,
-        pagination: paginationReducer
+        pagination: paginationReducer,
+        filters: filtersReducer
     }
     
     const reducerManager = createReducerManager(rootReducer);

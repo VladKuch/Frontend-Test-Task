@@ -6,6 +6,7 @@ export enum ButtonTheme {
     CLEAR = 'clear',
     OUTLINE = 'outline',
     SUCCESS = 'success',
+    PRIMARY = 'primary'
 }
 
 export enum ButtonSize {

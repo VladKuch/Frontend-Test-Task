@@ -1,26 +1,18 @@
 import cls from './MainPage.module.scss';
-import { FilterSection } from 'widgets/FilterSection';
 import { Table } from 'widgets/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import { ProductType, fetchProducts, getProductsData } from 'entities/Products';
-import { FiltersType } from 'widgets/FilterSection/ui/FilterSection';
 import { Pagination, getPaginationInfo } from 'entities/Pagination';
+import { Filters, getFilters } from 'entities/Filters';
 
 export function MainPage () {
     const header = ['ID', 'Название', 'Бренд', 'Цена'];
     const productsLimit = 50;
     const {currentPage} = useSelector(getPaginationInfo);
-    const [filters, setFilters] = useState<FiltersType>({});
+    const filters = useSelector(getFilters);
     const dispatch = useDispatch();
     const {result, isLoaded, isFiltered } = useSelector(getProductsData);
-
-    const onFiltersSubmit = useCallback(
-        (filters) => {
-            setFilters(filters);
-        }, 
-        [setFilters]
-    );
     
     const rows = result.map((product: ProductType) => ([
         product.id,
@@ -43,7 +35,7 @@ export function MainPage () {
     return (
       <main className={cls.MainPage}>
         <h2>Список товаров</h2>
-        <FilterSection onSubmit={onFiltersSubmit}/>
+        <Filters isLoaded={isLoaded}/>
         { !isFiltered && <Pagination /> }
         <Table 
           header={header}  

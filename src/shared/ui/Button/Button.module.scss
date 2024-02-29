@@ -21,8 +21,25 @@
 }
 
 .success {
-    background: $succesColor;
+    background: $successColor;
     color: $invertedColor;
+}
+.success:hover {
+    background: $successHoverColor;
+}
+.success:disabled {
+    background: $successColor;
+}
+.primary {
+    background: $primaryColor;
+    color: $invertedColor;
+}
+
+.primary:hover {
+    background: $primaryHoverColor;
+}
+.primary:disabled {
+    background: $primaryColor;
 }
 
 .square {
