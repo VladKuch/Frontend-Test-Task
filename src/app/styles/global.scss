@@ -8,17 +8,17 @@ html {
   padding: 0;
 }
 a {
-  color: $primaryColor;
+  color: $fontColor;
   text-decoration: none!important;
 }
 a:hover {
-  color: $primaryColor;
+  color: $fontColor;
 }
 body {
   margin: 0;
   font-family: $font;
   font-size: 14px;
-  color: $primaryColor;
+  color: $fontColor;
 }
 
 code {

@@ -17,7 +17,6 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
             clean: true,
         },
         plugins: buildPlugins(options),
-        target: !isDev ? ['web', 'es5'] : undefined,
         module: {
             rules: buildLoaders(options),
         },

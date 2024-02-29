@@ -1,12 +1,15 @@
 {
     "name": "testtaskvalantis",
     "version": "1.0.0",
+    "homepage": "https://vladkuch.github.io",
     "description": "",
     "main": "index.js",
     "scripts": {
         "start": "webpack serve --env port=3000 mode=development",
         "build:prod": "webpack  --env mode=production",
-        "build:dev": "webpack  --env mode=development"
+        "build:dev": "webpack  --env mode=development",
+        "predeploy": "npm run build:prod",
+        "deploy": "gh-pages -d build"
     },
     "keywords": [],
     "author": "Vladislav Kuch",
@@ -20,6 +23,7 @@
         "@types/webpack": "^5.28.0",
         "@types/webpack-dev-server": "^4.7.2",
         "css-loader": "^6.6.0",
+        "gh-pages": "^6.1.1",
         "html-webpack-plugin": "^5.5.0",
         "mini-css-extract-plugin": "^2.5.3",
         "sass": "^1.49.9",

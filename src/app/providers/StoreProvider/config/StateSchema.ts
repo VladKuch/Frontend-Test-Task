@@ -1,9 +1,11 @@
 import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 import { AxiosInstance } from "axios";
+import { PaginationSchema } from "entities/Pagination";
 import { ProductsSchema } from "entities/Products";
 
 export interface StateSchema {
-    products: ProductsSchema
+    products: ProductsSchema,
+    pagination: PaginationSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

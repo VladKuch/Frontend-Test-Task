@@ -3,13 +3,15 @@ import { StateSchema } from './StateSchema';
 import { createReducerManager } from './ReducerManager';
 import { $api } from 'shared/api/api';
 import { productsReducer } from 'entities/Products';
+import { paginationReducer } from 'entities/Pagination';
 
 export function createReduxStore(
     initialState?: StateSchema,
     asyncReducers?: ReducersMapObject<StateSchema>
     ) {
     const rootReducer: ReducersMapObject<StateSchema> = {
-        products: productsReducer
+        products: productsReducer,
+        pagination: paginationReducer
     }
     
     const reducerManager = createReducerManager(rootReducer);

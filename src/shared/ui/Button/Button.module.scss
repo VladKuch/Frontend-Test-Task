@@ -1,10 +1,10 @@
 @import 'app/styles/vars';
 .Button {
     cursor: pointer;
-    color: $primaryColor;
+    color: $fontColor;
     padding: 6px 15px;
     border-radius: 4px;
-    border: 1px solid $primaryColor;
+    border: 1px solid $fontColor;
 }
 
 .clear {
@@ -15,8 +15,8 @@
 }
 
 .outline {
-    border: 1px solid $primaryColor;
-    color: $primaryColor;
+    border: 1px solid $fontColor;
+    color: $fontColor;
     background: none;
 }
 

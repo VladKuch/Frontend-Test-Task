@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkConfig } from "app/providers/StoreProvider";
 import { ProductIdsSchema, ProductType, ProductsSchema } from "../../types/products";
 import { ids } from "webpack";
+import { paginationActions } from "entities/Pagination";
 
 interface ParamsSchema  {
     offset?: number;
@@ -14,30 +15,28 @@ interface ParamsSchema  {
 const fetchProducts = createAsyncThunk<ProductsSchema, ParamsSchema, ThunkConfig<string>>(
     'products/fetchProducts',
     //@ts-ignore
-    async (params, {extra, rejectWithValue}) => {
+    async (params, {extra, rejectWithValue, dispatch}) => {
         try {
             let productIdsPayload;
-            let totalCount;
+            let isFiltered = false;
             if ('price' in params || 'brand' in params || 'product' in params) {
                 productIdsPayload = {
                     action: "filter",
                     params
                 };
-                totalCount = 0;
+                isFiltered = true;
             } else {
                 productIdsPayload = {
                     action: "get_ids",
                     params
                 };
-                const totalCountPayload = {
-                    action: "get_ids"
-                };
-                const totalCountResponse = await extra.api.post<ProductIdsSchema>('', totalCountPayload);
-                totalCount = totalCountResponse.data.result.length;
             }
             const productIdsResponse = await extra.api.post<ProductIdsSchema>('', productIdsPayload);
             const productIds = productIdsResponse.data.result;
 
+            if (!isFiltered && (productIds.length < __PAGE_LENGTH__)) {
+                dispatch(paginationActions.setLastPage(true));
+            }
             const payload = {
                 action: "get_items",
                 params: {
@@ -57,7 +56,7 @@ const fetchProducts = createAsyncThunk<ProductsSchema, ParamsSchema, ThunkConfig
             const productsResponse: ProductsSchema = {
                 result: products,
                 isLoaded: true,
-                totalCount
+                isFiltered
             };
             return productsResponse;
         } catch(e) {

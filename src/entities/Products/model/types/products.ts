@@ -7,9 +7,9 @@ export type ProductType = {
 
 export interface ProductsSchema {
     result: Array<ProductType>;
-    totalCount: number;
     error?: string;
     isLoaded: boolean;
+    isFiltered: boolean;
 } 
 
 export interface ProductIdsSchema {

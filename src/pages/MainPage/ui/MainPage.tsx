@@ -3,19 +3,17 @@ import { FilterSection } from 'widgets/FilterSection';
 import { Table } from 'widgets/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
-import { ProductType, fetchProducts, getProducts, getProductsIsLoaded, getProductsTotalCount } from 'entities/Products';
-import { Loader } from 'widgets/Loader';
+import { ProductType, fetchProducts, getProductsData } from 'entities/Products';
 import { FiltersType } from 'widgets/FilterSection/ui/FilterSection';
+import { Pagination, getPaginationInfo } from 'entities/Pagination';
 
 export function MainPage () {
     const header = ['ID', 'Название', 'Бренд', 'Цена'];
     const productsLimit = 50;
-    const [currentPage, setCurrentPage] = useState<number>(0);
+    const {currentPage} = useSelector(getPaginationInfo);
     const [filters, setFilters] = useState<FiltersType>({});
     const dispatch = useDispatch();
-    const products = useSelector(getProducts);
-    const isLoaded = useSelector(getProductsIsLoaded);
-    const totalCount = useSelector(getProductsTotalCount);
+    const {result, isLoaded, isFiltered } = useSelector(getProductsData);
 
     const onFiltersSubmit = useCallback(
         (filters) => {
@@ -24,7 +22,7 @@ export function MainPage () {
         [setFilters]
     );
     
-    const rows = products.map((product: ProductType) => ([
+    const rows = result.map((product: ProductType) => ([
         product.id,
         product.product,
         product.brand,
@@ -46,15 +44,12 @@ export function MainPage () {
       <main className={cls.MainPage}>
         <h2>Список товаров</h2>
         <FilterSection onSubmit={onFiltersSubmit}/>
-        {
-          isLoaded ? 
-          <Table 
-            header={header}  
-            rows={rows}
-          />
-          :
-          <Loader />
-        }
+        { !isFiltered && <Pagination /> }
+        <Table 
+          header={header}  
+          rows={rows}
+          isLoaded={isLoaded}
+        />
       </main>
     );
 };

@@ -1,35 +1,37 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Table.module.scss';
+import { Key } from 'react';
+import { Loader } from 'widgets/Loader';
 interface TableProps {
     header: Array<string>;
-    rows?: Array<Array<string>>
+    rows?: Array<Array<string>>;
+    isLoaded: boolean;
 }
 export const Table = (props: TableProps) => {
     const {
         header,
-        rows
+        rows,
+        isLoaded
     } = props;
     return (
         <div className={cls.Table}>
             <table>
                 <thead>
                     <tr>
-                        {header.map((item: string) => <th>{item}</th>)}
+                        {header.map((item: string, key: Key) => <th key={key}>{item}</th>)}
                     </tr>
                 </thead>
+                {isLoaded && 
                 <tbody>
-                    {rows.map((row: Array<string>) => {
-                        return <tr>
-                            {row.map((item: string) => <td>{item}</td>)}
+                    {rows.map((row: Array<string>, key: Key) => {
+                        return <tr key={key}>
+                            {row.map((item: string, key: Key) => <td key={key}>{item}</td>)}
                         </tr>
                     })}                    
                 </tbody>
+                }
             </table>
-
-            <div className="pagination">
-                <a href="#" className="prev">&laquo; Предыдущая</a>
-                <a href="#" className="next">Следующая &raquo;</a>
-            </div>
+            {!isLoaded && <Loader />}
         </div>
     );
 };

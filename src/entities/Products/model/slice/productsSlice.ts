@@ -4,8 +4,8 @@ import { ProductType, ProductsSchema } from '../types/products';
 
 const initialState: ProductsSchema = {
     result: [],
-    totalCount: 0,
     isLoaded: false,
+    isFiltered: false,
     error: ''
 };
 
@@ -21,7 +21,7 @@ export const productsSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<ProductsSchema>) => {
                 state.result = action.payload.result;
                 state.isLoaded = action.payload.isLoaded;
-                state.totalCount = action.payload.totalCount;
+                state.isFiltered = action.payload.isFiltered;
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.error = action.payload as string;

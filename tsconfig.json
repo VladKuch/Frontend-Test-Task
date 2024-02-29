@@ -24,7 +24,7 @@
        "./config/jest/setupTests.ts",
        "./src/**/*ts",
        "./src/**/*tsx"
-    ],
+, "src/entities/Products/model/selectors/getProductsData"    ],
     "ts-node": {
       "compilerOptions": {
         "module": "CommonJS"

@@ -14,17 +14,5 @@ export {
 } from './model/services/fetchProducts/fetchProducts';
 
 export {
-    getProducts
-} from './model/selectors/getProducs/getProducts';
-
-export {
-    getProductsIsLoaded
-} from './model/selectors/getProducsIsLoaded/getProductsIsLoaded';
-
-export {
-    getProductsError
-} from './model/selectors/getProductsError/getProductsError';
-
-export {
-    getProductsTotalCount
-} from './model/selectors/getProducsTotalCount/getProductsTotalCount';
+    getProductsData
+} from './model/selectors/getProductsData/getProductsData';

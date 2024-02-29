@@ -1,7 +1,7 @@
 import { InputNumber } from 'shared/ui/Inputs/InputNumber';
 import cls from './FilterSection.module.scss';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { InputText } from 'shared/ui/Inputs/InputText';
 
 export type FiltersType = {
@@ -12,7 +12,7 @@ export type FiltersType = {
 interface FilterSectionProps {
     onSubmit: (filters: FiltersType) => void
 }
-export const FilterSection = (props: FilterSectionProps) => {
+export const FilterSection = memo((props: FilterSectionProps) => {
     const { 
         onSubmit
     } = props
@@ -72,4 +72,4 @@ export const FilterSection = (props: FilterSectionProps) => {
             <Button onClick={onClearFilters}>Сбросить фильтры</Button>
         </div>
     );
-};
+});
