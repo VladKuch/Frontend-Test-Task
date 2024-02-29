@@ -1,0 +1,17 @@
+//Font
+$font: Arial, sans-serif;
+$fontSizeM: 16px;
+$fontLineM: 24px;
+$fontM: $fontSizeM / $fontLineM $font;
+$fontLineL: 32px;
+$fontSizeL: 24px;
+$fontSizeXl: 32px;
+$fontLineXl: 40px;
+$fontL: $fontSizeL / $fontLineL $font;
+$fontXl: $fontSizeXl / $fontLineXl $font;
+
+
+//Colors
+$primaryColor: #2f2e2f;
+$invertedColor: #fff;
+$succesColor: #4CAF50;

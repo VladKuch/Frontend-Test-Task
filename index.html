@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список товаров</title>
+    <style>
+        /* CSS стили можно определить здесь или подключить внешний файл */
+        /* Пример стилей для простоты */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .pagination a {
+            color: black;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+        /* Стили для зоны фильтров */
+        .filters {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .filters label {
+            margin-right: 10px;
+        }
+        .filters input[type="text"],
+        .filters input[type="number"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 200px;
+            box-sizing: border-box;
+        }
+        .filters input[type="submit"] {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Список товаров</h2>
+
+<!-- Зона с фильтрами -->
+<div class="filters">
+    <label for="filterName">Фильтр по названию:</label>
+    <input type="text" id="filterName" name="filterName">
+    <label for="filterPrice">Фильтр по цене:</label>
+    <input type="number" id="filterPrice" name="filterPrice" min="0">
+    <label for="filterBrand">Фильтр по бренду:</label>
+    <input type="text" id="filterBrand" name="filterBrand">
+    <input type="submit" value="Применить фильтры">
+</div>
+
+<!-- Таблица для отображения списка товаров -->
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Бренд</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Здесь будут генерироваться строки таблицы с помощью JavaScript -->
+    </tbody>
+</table>
+
+<!-- Пагинация -->
+<div class="pagination">
+    <a href="#" class="prev">&laquo; Предыдущая</a>
+    <a href="#" class="next">Следующая &raquo;</a>
+</div>
+
+<script>
+    // JavaScript код для загрузки данных и обработки событий
+    // Здесь можно использовать AJAX для запроса данных о товарах и их отображения
+
+    // Пример заглушки для генерации данных о товарах
+    const totalProducts = 120;
+    const productsPerPage = 50;
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+    // Генерация массива товаров
+    const products = [];
+    for (let i = 1; i <= totalProducts; i++) {
+        products.push({
+            id: i,
+            name: `Товар ${i}`,
+            price: Math.floor(Math.random() * 1000) + 100,
+            brand: `Бренд ${Math.ceil(i / 40)}`
+        });
+    }
+
+    // Функция для отображения списка товаров в таблице
+    function displayProducts(pageNumber) {
+        const tbody = document.querySelector('tbody');
+        tbody.innerHTML = ''; // Очистка таблицы перед добавлением новых данных
+
+        const startIndex = (pageNumber - 1) * productsPerPage;
+        const endIndex = Math.min(startIndex + productsPerPage, totalProducts);
+
+        for (let i = startIndex; i < endIndex; i++) {
+            const product = products[i];
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${product.id}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>${product.brand}</td>
+            `;
+            tbody.appendChild(row);
+        }
+    }
+
+    // Функция для отображения пагинации
+    function displayPagination() {
+        if (totalPages <= 1) {
+            return; // Не отображать пагинацию, если всего одна страница
+        }
+
+        const pagination = document.querySelector('.pagination');
+        pagination.innerHTML = ''; // Очистка пагинации перед добавлением новых элементов
+
+        for (let i = 1; i <= totalPages; i++) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.textContent = i;
+            if (i === currentPage) {
+                link.classList.add('active');
+            }
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                currentPage = i;
+                displayProducts(currentPage);
+                updatePaginationLinks();
+            });
+            pagination.appendChild(link);
+        }
+    }
+
+    // Переменная для хранения текущей страницы
+    let currentPage = 1;
+
+    // Функция для обновления класса активной ссылки в пагинации
+    function updatePaginationLinks() {
+        const paginationLinks = document.querySelectorAll('.pagination a');
+        paginationLinks.forEach(link => {
+            const pageNumber = parseInt(link.textContent);
+            if (pageNumber === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    // Вызов функции для отображения начального списка товаров и пагинации
+    displayProducts(currentPage);
+    displayPagination();
+</script>
+
+</body>
+</html>
