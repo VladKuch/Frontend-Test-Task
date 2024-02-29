@@ -36,7 +36,12 @@ export function MainPage () {
       <main className={cls.MainPage}>
         <h2>Список товаров</h2>
         <Filters isLoaded={isLoaded}/>
-        { !isFiltered && <Pagination /> }
+        { 
+          !isFiltered && 
+          <Pagination 
+            isLoaded={isLoaded}
+          /> 
+        }
         <Table 
           header={header}  
           rows={rows}

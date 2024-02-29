@@ -5,7 +5,15 @@ import { paginationActions } from 'entities/Pagination';
 import { useCallback } from 'react';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 
-export const Pagination = () => {
+interface PaginationType {
+    isLoaded: boolean;
+}
+
+export const Pagination = (props: PaginationType) => {
+    const {
+        isLoaded
+    } = props;
+
     const { 
         currentPage,
         isFirstPage,
@@ -20,17 +28,17 @@ export const Pagination = () => {
     const onNextPage = useCallback(() => {
         dispatch(paginationActions.setNextPage());
     }, [dispatch]);
-    
+
     return (
         <div className={cls.Pagination}>
             <Button
-                disabled={isFirstPage}
+                disabled={isFirstPage || !isLoaded}
                 onClick={onPrevPage}
                 theme={ButtonTheme.PRIMARY}
             >Назад</Button>
             <span className={cls.currentPage}>{currentPage}</span>
             <Button 
-                disabled={isLastPage}
+                disabled={isLastPage || !isLoaded}
                 onClick={onNextPage}
                 theme={ButtonTheme.PRIMARY}
             >Вперед</Button>
