@@ -5,6 +5,7 @@ import { $api } from 'shared/api/api';
 import { productsReducer } from 'entities/Products';
 import { paginationReducer } from 'entities/Pagination';
 import { filtersReducer } from 'entities/Filters';
+import { brandsReducer } from 'entities/Brands';
 
 // Функция для создания Redux хранилища
 export function createReduxStore(
@@ -14,7 +15,8 @@ export function createReduxStore(
     const rootReducer: ReducersMapObject<StateSchema> = {
         products: productsReducer,
         pagination: paginationReducer,
-        filters: filtersReducer
+        filters: filtersReducer,
+        brands: brandsReducer
     }
     
     const reducerManager = createReducerManager(rootReducer);

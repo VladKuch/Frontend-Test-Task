@@ -1,5 +1,6 @@
 import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 import { AxiosInstance } from "axios";
+import { BrandsSchema } from "entities/Brands";
 import { FiltersSchema } from "entities/Filters";
 import { PaginationSchema } from "entities/Pagination";
 import { ProductsSchema } from "entities/Products";
@@ -7,7 +8,8 @@ import { ProductsSchema } from "entities/Products";
 export interface StateSchema {
     products: ProductsSchema,
     pagination: PaginationSchema,
-    filters: FiltersSchema
+    filters: FiltersSchema,
+    brands: BrandsSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

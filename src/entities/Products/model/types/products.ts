@@ -1,4 +1,4 @@
-export type ProductType = {
+export interface ProductType {
     id: string;
     product: string;
     brand: string;

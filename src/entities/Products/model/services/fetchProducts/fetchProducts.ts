@@ -49,16 +49,16 @@ const fetchProducts = createAsyncThunk<ProductsSchema, ParamsSchema, ThunkConfig
 
                 // Запрос на получение товаров
                 const response = await extra.api.post<ProductsSchema>('', payload); 
-                const uniqueIds = new Set();
+                const uniqueIds = new Set<string>();
                 
                 // Фильтрация дубликатов товаров
                 const products: Array<ProductType> = response.data.result.filter((obj: ProductType) => {
                     if (uniqueIds.has(obj.id)) {
                         return false;
-                    } else {
-                        uniqueIds.add(obj.id);
-                        return true;
-                    }
+                    } 
+
+                    uniqueIds.add(obj.id);
+                    return true;
                 });
 
                 if (!isFiltered && (productIds.length < __PAGE_LENGTH__)) {

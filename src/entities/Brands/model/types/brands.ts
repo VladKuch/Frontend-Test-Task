@@ -1,0 +1,1 @@
+export type BrandsSchema = Array<string | null>
